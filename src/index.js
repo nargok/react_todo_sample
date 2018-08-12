@@ -26,23 +26,28 @@ class Todo extends Component {
     const item = { title: title, done: false }
     const tasks = this.state.tasks
     tasks.push(item)
-    this.setState({ 
-      tasks: tasks,
-      inputValue: ""
-    })
+    this.updateTasks(tasks)
+    this.clearInputValue()
   }
 
   handleResetButton = () => {
-    this.setState({
-      inputValue: "",
-      tasks: []
-    })
+    const tasks = []
+    this.updateTasks(tasks)
+    this.clearInputValue()
   }
 
   handleClickItem = (index) => {
     const tasks = this.state.tasks
     tasks[index].done = !tasks[index].done
+    this.updateTasks(tasks)
+  }
+
+  updateTasks = (tasks) => {
     this.setState({ tasks: tasks })
+  }
+
+  clearInputValue = () => {
+    this.setState({ inputValue: "" })
   }
 
   render() {
@@ -52,7 +57,6 @@ class Todo extends Component {
       } else {
         return <li key={index} onClick={() => this.handleClickItem(index)}>{task.title}</li>
       }
-      
     })
 
     return(

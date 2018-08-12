@@ -32,6 +32,13 @@ class Todo extends Component {
     })
   }
 
+  handleResetButton = () => {
+    this.setState({
+      inputValue: "",
+      tasks: []
+    })
+  }
+
   render() {
     const items = this.state.tasks.map((task, index) => {
       return <li key={index}>{task.title}</li>
@@ -42,7 +49,7 @@ class Todo extends Component {
         <div>
           <input type="text" value={this.state.inputValue} onChange={this.handleChangeInput} />
           <button onClick={this.handleAddButton}>Add</button>
-          <button>Reset</button>
+          <button onClick={this.handleResetButton}>Reset</button>
         </div>
         <ul>
           {items}

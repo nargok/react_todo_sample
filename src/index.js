@@ -39,9 +39,20 @@ class Todo extends Component {
     })
   }
 
+  handleClickItem = (index) => {
+    const tasks = this.state.tasks
+    tasks[index].done = !tasks[index].done
+    this.setState({ tasks: tasks })
+  }
+
   render() {
     const items = this.state.tasks.map((task, index) => {
-      return <li key={index}>{task.title}</li>
+      if (task.done === true) {
+        return <s key={index} onClick={() => this.handleClickItem(index)}><li>{task.title}</li></s>
+      } else {
+        return <li key={index} onClick={() => this.handleClickItem(index)}>{task.title}</li>
+      }
+      
     })
 
     return(
